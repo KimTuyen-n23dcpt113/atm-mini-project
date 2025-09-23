@@ -1,2 +1,2 @@
-# atm-mini-project
+# ATM Mini Project
 ATM Mini Project - Software Engineering Lab
