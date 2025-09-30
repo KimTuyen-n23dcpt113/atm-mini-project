@@ -1,0 +1,28 @@
+@startuml
+actor Customer
+actor "Bank System" as Bank
+
+rectangle ATM {
+  usecase "Insert Card" as UC_InsertCard
+  usecase "Enter PIN" as UC_EnterPIN
+  usecase "Authenticate" as UC_Authenticate
+  usecase "Withdraw Cash" as UC_WithdrawCash
+  usecase "Check Balance" as UC_CheckBalance
+  usecase "Dispense Cash" as UC_DispenseCash
+  usecase "Print Receipt" as UC_PrintReceipt
+}
+
+Customer --> UC_InsertCard
+Customer --> UC_EnterPIN
+
+UC_EnterPIN ..> UC_Authenticate : <<include>>
+UC_WithdrawCash ..> UC_Authenticate : <<include>>
+UC_WithdrawCash ..> UC_CheckBalance : <<include>>
+
+UC_WithdrawCash --> UC_DispenseCash
+UC_WithdrawCash --> UC_PrintReceipt
+
+UC_Authenticate --> Bank : verifyPIN()
+UC_CheckBalance --> Bank : checkBalance(account, amount)
+@enduml
+
